@@ -1,12 +1,20 @@
-CC=gcc
-CFLAGS=-O3 -fopenmp
-LDFLAGS=-lssl -lcrypto
-TARGET=brute_force_ripemd
+# Makefile to build and run the program
 
-all: $(TARGET)
+CC = gcc
+CFLAGS = -Wall -O2 -fopenmp
+LIBS = -lssl -lcrypto
 
-$(TARGET): brute_force_ripemd.c
-	$(CC) $(CFLAGS) -o $(TARGET) brute_force_ripemd.c $(LDFLAGS)
+TARGET = brute_force_ripemd
+SRC = brute_force_ripemd.c
 
+# Target to build the executable
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) $(SRC) -o $(TARGET) $(LIBS)
+
+# Target to clean the build artifacts
 clean:
 	rm -f $(TARGET)
+
+# Target to run the program
+run: $(TARGET)
+	./$(TARGET)
